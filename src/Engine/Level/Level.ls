@@ -14,12 +14,14 @@ package
 		protected var tileMap:TMXTileMap;
 		protected var bodies:Vector.<Body>;
 		protected var trackedBody:Body;
+		protected var gravity:Number = -10;
 
 		private var focusX:int;
 		private var focusY:int;
 
 		function Level()
 		{
+			bodies = new Vector.<Body>();
 			this.addEventListener(Event.ADDED_TO_STAGE, function(event:Event)
 			{
 				this.doScale();
@@ -38,11 +40,15 @@ package
 			for (var i:int = 0; i < tileMap.layers().length; i++) 
 			{
 				tileMap.addChild(tileMap.layers()[i].getHolder());
-				trace(tileMap.layers()[i]);
-				trace(tileMap.layers()[i].getFullTypeName());
 			}
 
 			this.addChild(tileMap);
+		}
+
+		public function addBody(body:Body):void
+		{
+			bodies.push(body);
+			addChild(body);
 		}
 
 		public function trackBody(body:Body):void
@@ -56,12 +62,9 @@ package
 				
 				trackedBody.addEventListener(Body.MOVED, 
 					function(event:Event) {
-
-						trace(trackedBody.x, trackedBody.y);
 						focus(trackedBody.x, - trackedBody.y);
 					}
 				);
-
 			}
 		}
 
@@ -76,6 +79,15 @@ package
 			doScale();
 		}
 
+		public function onElapsed(seconds:Number) 
+		{
+			trace(seconds);
+			bodies.forEach(function(body:Body) {
+				body.velocityY -= gravity * seconds;
+				body.onElapsed(seconds);
+			});
+		}
+
 		private function doScale()
 		{
 			// @TODO bound the view
@@ -83,15 +95,22 @@ package
 			if (stage != null) {
 				// @TODO get parent containers bounding box, instead of stage
 				//       look into DisplayObject.view
-				var containerWidth:int = tileMap.width;
-				var containerHeight:int = tileMap.height;
+				var containerWidth = stage.nativeStageWidth;
+				var containerHeight = stage.nativeStageHeight;
+				var levelWidth = this.width;
+				var levelHeight = this.height;
+
+			//	var levelOffsetX = (containerWidth / 2) - this.focusX;
+			//	var levelOffsetY = (containerWidth / 2) - this.focusX;
 
 				trace(containerWidth, containerHeight);
 
+				// perhaps cast to int? doesn't necessarily make any sense though.
+				
 				this.y = -1 * scale * ((containerHeight / 2) - this.focusY);
 				this.x = scale * ((containerWidth / 2) - this.focusX);
 
-				trace(this.x, this.y);
+				trace(this.x, this.y, this.scale);
 
 				this.scale = scale;
 			}

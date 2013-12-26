@@ -10,12 +10,13 @@ package
 
 		public function onKeyUp(key:LoomKey)
 		{
+
+			body.velocityX = 0;
+			body.velocityY = 0;
+
 			if (body == null) { 
 				return;
 			}
-			trace("UP");
-			trace(key);
-
 		}
 		public function onKeyDown(key:LoomKey)
 		{
@@ -23,22 +24,22 @@ package
 				return;
 			}
 
-			trace("DOWN");
-			trace(key);
+			body.velocityX = 0;
+			body.velocityY = 0;
 
 			switch (key) 
 			{
 				case LoomKey.UP_ARROW:
-					body.move(this.body.x, this.body.y - 8);
+					body.velocityY = -32;
 					break;
 				case LoomKey.DOWN_ARROW:
-					body.move(this.body.x, this.body.y + 8);
+					body.velocityY = 32;
 					break;
 				case LoomKey.LEFT_ARROW:
-					body.move(this.body.x - 8, this.body.y);
+					body.velocityX = -32;
 					break;
 				case LoomKey.RIGHT_ARROW:
-					body.move(this.body.x + 8, this.body.y);
+					body.velocityX = 32;
 					break;
 			}
 		}

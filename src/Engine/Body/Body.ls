@@ -9,17 +9,26 @@ package
 	{
 		public static const MOVED:String="MOVED";
 
+		public var velocityX:Number;
+		public var velocityY:Number;
+
 		function Body(texture:Texture) {
-			this.texture = texture;
+			Image(texture);
+		}
+
+		public function onElapsed(seconds:Number) 
+		{
+			this.x += (velocityX * seconds);
+			this.y += (velocityY * seconds);
+
+			dispatchEvent(new Event(Body.MOVED));
 		}
 
 		public function move(x:int, y:int):void {
 			this.x = x;
 			this.y = y;
 
-			var event = new Event(Body.MOVED);
-
-			dispatchEvent(event);
+			dispatchEvent(new Event(Body.MOVED));
 		}
 	}
 }
