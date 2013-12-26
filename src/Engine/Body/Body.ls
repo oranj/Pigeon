@@ -1,9 +1,9 @@
 package
 {
-	import loom.gameframework.LoomComponent;
+	import loom2d.display.DisplayObject;
 	import loom2d.textures.Texture;
 
-	class Body extends LoomComponent 
+	class Body extends DisplayObject 
 	{
 		protected var texture:Texture;
 		function Body(texture:Texture) {

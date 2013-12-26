@@ -1,6 +1,6 @@
 package
 {
-	public class Computer extends Agent 
+	public class HumanAgent extends Agent 
 	{
 
 	}

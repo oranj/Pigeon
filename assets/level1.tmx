@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="10" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tiles.png" width="320" height="480"/>
+ </tileset>
+ <tileset firstgid="151" name="clouds" tilewidth="32" tileheight="32">
+  <image source="bg.png" width="1280" height="480"/>
+ </tileset>
+ <layer name="Tile Layer 4" width="30" height="10">
+  <data encoding="base64" compression="zlib">
+   eJyt0jVUFgAABOAfdbe7O3e7u3O3uzt3u4sywG4U7KDLbuwOEDEAOz+fz8XByXv3zbfc2kAgEEwIoYQRzjrWs4GNRBDJJjazha1sYzs72MkudrOHvewjiv0cIJoYYokjngQSSSKZFFJJI53TnOEs5zjPBS5yictc4SrXuE4GN7jJLW5zh+dkksULsnlJDq94zRvekkse+bzjPR/4yCc+84WvfOM7PwgEKQUoSCEKU4SiFKM4JShJKUpThrKUozwVqEglKlOFqlSjOjWoSS1qU4e61KM+DWhIIxrThKY0ozktaEkrWtOGtrSjPR3oSCc604WudKM7PehJL3rTh770oz8DGMggBjOEoQxjOCMYyShGM4axjGM8E5jIJCYzhalMYzozmMksZjOHucxjPgtYyCIWs4SlLGM5K1jJKlazhrUEE0IoYYSzjvVsYCMRRLKJzewjiv0cIJoYDnKIwxzhKMc4zglOcopY4ogngUSSSCaFVNJID/r9nz8yuMFNbnGbO9zlHvd5wEMe8ZgnPOUZz8kkixdk85Kcv3Z+ySWP/KDAf83fO//KT6gLmbI=
+  </data>
+ </layer>
+ <layer name="Background" width="30" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg8QAUHJgYYALEhEBuRYa8xDkypuZTYSwog1Y3E2KuMBVMKiLFXEwsmBFiBmI2AvcjpCZe9yH7FZq8vGp8diAWIsBeZxmUvMo0OXND4/HSy1w+PvTo4sBkONj4xfOagqwcAGKAU2Q==
+  </data>
+ </layer>
+ <layer name="Collision" width="30" height="10" opacity="0.38">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALSgNIAYQD7uAP9
+  </data>
+ </layer>
+ <layer name="Foreground" width="30" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+</map>
