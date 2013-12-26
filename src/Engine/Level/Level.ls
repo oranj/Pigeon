@@ -13,9 +13,10 @@ package
 	{
 		protected var tileMap:TMXTileMap;
 		protected var bodies:Vector.<Body>;
+		protected var trackedBody:Body;
 
 		private var focusX:int;
-		private var focuxY:int;
+		private var focusY:int;
 
 		function Level()
 		{
@@ -44,10 +45,30 @@ package
 			this.addChild(tileMap);
 		}
 
+		public function trackBody(body:Body):void
+		{
+			if (trackedBody != null) {
+				trackedBody.removeEventListeners(Body.MOVED);
+			}
+
+			trackedBody = body;
+			if (trackedBody != null) {
+				
+				trackedBody.addEventListener(Body.MOVED, 
+					function(event:Event) {
+
+						trace(trackedBody.x, trackedBody.y);
+						focus(trackedBody.x, - trackedBody.y);
+					}
+				);
+
+			}
+		}
+
 		protected function focus(x:int, y:int, scale:Number=null)
 		{
 			focusX = x;
-			focuxY = y;
+			focusY = y;
 			if (scale != null) {
 				this.scale = scale;
 			}
@@ -62,11 +83,15 @@ package
 			if (stage != null) {
 				// @TODO get parent containers bounding box, instead of stage
 				//       look into DisplayObject.view
-				var containerWidth:int = stage.width;
-				var containerHeight:int = stage.height;
+				var containerWidth:int = tileMap.width;
+				var containerHeight:int = tileMap.height;
 
-				this.y = -1 * scale * ((containerHeight / 2) - y);
-				this.x = -1 * scale * ((containerWidth / 2) - x);
+				trace(containerWidth, containerHeight);
+
+				this.y = -1 * scale * ((containerHeight / 2) - this.focusY);
+				this.x = scale * ((containerWidth / 2) - this.focusX);
+
+				trace(this.x, this.y);
 
 				this.scale = scale;
 			}
