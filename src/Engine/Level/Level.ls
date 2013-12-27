@@ -5,8 +5,10 @@ package
 	import loom2d.tmx.TMXTileMap;
 	import loom2d.textures.Texture;
 	import loom2d.display.Stage;
+	import loom2d.display.Sprite;
 	import loom2d.display.DisplayObjectContainer;
 	import system.Vector;
+	import loom2d.tmx.TMXLayer;
 
 
 	class Level extends DisplayObjectContainer
@@ -14,7 +16,8 @@ package
 		protected var tileMap:TMXTileMap;
 		protected var bodies:Vector.<Body>;
 		protected var trackedBody:Body;
-		protected var gravity:Number = -10;
+		protected var gravity:Number = -100;
+		protected var spriteLayer:Sprite;
 
 		private var focusX:int;
 		private var focusY:int;
@@ -22,6 +25,8 @@ package
 		function Level()
 		{
 			bodies = new Vector.<Body>();
+			spriteLayer = new Sprite();
+
 			this.addEventListener(Event.ADDED_TO_STAGE, function(event:Event)
 			{
 				this.doScale();
@@ -37,18 +42,32 @@ package
 			tileMap = new TMXTileMap();
 			tileMap.load(path);
 
-			for (var i:int = 0; i < tileMap.layers().length; i++) 
-			{
-				tileMap.addChild(tileMap.layers()[i].getHolder());
+			var layers = tileMap.layers();
+
+			if (layers.length != 7) {
+				var iii = 1 / 0;
 			}
 
-			this.addChild(tileMap);
+			this.addChild(layers[0].getHolder());
+			this.addChild(layers[1].getHolder());
+			this.addChild(layers[2].getHolder());
+
+			this.addChild(spriteLayer);
+
+			this.addChild(layers[3].getHolder());
+			this.addChild(layers[4].getHolder());
+			this.addChild(layers[5].getHolder());
+
+			var collisionLayer = layers[6];
+
+
+			//this.addChild(tileMap); 
 		}
 
 		public function addBody(body:Body):void
 		{
 			bodies.push(body);
-			addChild(body);
+			spriteLayer.addChild(body);
 		}
 
 		public function trackBody(body:Body):void
@@ -81,7 +100,6 @@ package
 
 		public function onElapsed(seconds:Number) 
 		{
-			trace(seconds);
 			bodies.forEach(function(body:Body) {
 				body.velocityY -= gravity * seconds;
 				body.onElapsed(seconds);
@@ -100,17 +118,10 @@ package
 				var levelWidth = this.width;
 				var levelHeight = this.height;
 
-			//	var levelOffsetX = (containerWidth / 2) - this.focusX;
-			//	var levelOffsetY = (containerWidth / 2) - this.focusX;
-
-				trace(containerWidth, containerHeight);
-
 				// perhaps cast to int? doesn't necessarily make any sense though.
-				
-				this.y = -1 * scale * ((containerHeight / 2) - this.focusY);
-				this.x = scale * ((containerWidth / 2) - this.focusX);
 
-				trace(this.x, this.y, this.scale);
+				this.y = scale * ((containerHeight / 2) + this.focusY);
+				this.x = scale * ((containerWidth / 2) - this.focusX);
 
 				this.scale = scale;
 			}

@@ -18,8 +18,15 @@ package
 
 		public function onElapsed(seconds:Number) 
 		{
-			this.x += (velocityX * seconds);
-			this.y += (velocityY * seconds);
+			this.x = (int)(this.x + (velocityX * seconds));
+			this.y = (int)(this.y + (velocityY * seconds));
+
+			if (y <= 0) {
+				y = 0;
+				velocityY = 0;
+			}
+
+			trace(x, y);
 
 			dispatchEvent(new Event(Body.MOVED));
 		}

@@ -1,14 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <TextureAtlas imagePath='lucasxp.png'>
 
-	<SubTexture name='dn_0' x='0'   y='0' width='30' height='50'/>
-	<SubTexture name='dn_1' x='30'  y='0' width='30' height='50'/>
-	<SubTexture name='dn_2' x='60'  y='0' width='30' height='50'/>
-	<SubTexture name='dn_3' x='90'  y='0' width='30' height='50'/>
+	<SubTexture name='dn_0' x='0'   y='0'   width='30' height='50'/>
+	<SubTexture name='dn_1' x='30'  y='0'   width='30' height='50'/>
+	<SubTexture name='dn_2' x='60'  y='0'   width='30' height='50'/>
+	<SubTexture name='dn_3' x='90'  y='0'   width='30' height='50'/>
 
-	<SubTexture name='bk_0' x='0'   y='50' width='30' height='50'/>
-	<SubTexture name='bk_1' x='30'  y='50' width='30' height='50'/>
-	<SubTexture name='bk_2' x='60'  y='50' width='30' height='50'/>
-	<SubTexture name='bk_3' x='90'  y='50' width='30' height='50'/>
+	<SubTexture name='bk_0' x='0'   y='50'  width='30' height='50'/>
+	<SubTexture name='bk_1' x='30'  y='50'  width='30' height='50'/>
+	<SubTexture name='bk_2' x='60'  y='50'  width='30' height='50'/>
+	<SubTexture name='bk_3' x='90'  y='50'  width='30' height='50'/>
 
 	<SubTexture name='fw_0' x='0'   y='100' width='30' height='50'/>
 	<SubTexture name='fw_1' x='30'  y='100' width='30' height='50'/>

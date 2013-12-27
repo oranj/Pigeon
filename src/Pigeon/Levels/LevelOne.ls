@@ -4,7 +4,7 @@ package {
 	{
 		function LevelOne() 
 		{
-			loadTileMap("assets/level1.tmx");
+			loadTileMap("assets/level_1.tmx");
 		}	
 	}
 }
