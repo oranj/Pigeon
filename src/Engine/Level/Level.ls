@@ -10,22 +10,20 @@ package
 	import system.Vector;
 	import loom2d.tmx.TMXLayer;
 
-
 	class Level extends DisplayObjectContainer
 	{
 		protected var tileMap:TMXTileMap;
-		protected var bodies:Vector.<Body>;
-		protected var trackedBody:Body;
-		protected var gravity:Number = -100;
 		protected var spriteLayer:Sprite;
-
+		protected var physics:Physics;
+		protected var trackedBody:Body;
 		private var focusX:int;
 		private var focusY:int;
 
 		function Level()
 		{
-			bodies = new Vector.<Body>();
 			spriteLayer = new Sprite();
+			physics = new Physics();
+			//physics.gravity = 10;
 
 			this.addEventListener(Event.ADDED_TO_STAGE, function(event:Event)
 			{
@@ -42,12 +40,11 @@ package
 			tileMap = new TMXTileMap();
 			tileMap.load(path);
 
-			var layers = tileMap.layers();
-
-			if (layers.length != 7) {
-				var iii = 1 / 0;
+			if (tileMap.numLayers() != 7) {
+				trace("Error, dog");
 			}
 
+			var layers = tileMap.layers();
 			this.addChild(layers[0].getHolder());
 			this.addChild(layers[1].getHolder());
 			this.addChild(layers[2].getHolder());
@@ -59,6 +56,38 @@ package
 			this.addChild(layers[5].getHolder());
 
 			var collisionLayer = layers[6];
+			var collisions:Vector.<Number> = collisionLayer.getData();
+
+			var layerWidth = tileMap.mapWidth();
+			var layerHeight = collisions.length / layerWidth;
+			var tileWidth = tileMap.tileWidth();
+			var tileHeight = tileMap.tileHeight();
+
+
+			var k:Number = 0;
+
+			for (var y = 0; y < layerHeight; y ++) 
+			{
+				for (var x = 0; x < layerWidth; x++) 
+				{
+					if (collisions[k] == 1) // square boundary
+					{
+						physics.addBoundary(new BoxBoundary(
+							x * tileWidth,
+							y * tileHeight, 
+							(x + 1) * tileWidth,
+							(y + 1) * tileHeight
+						));
+
+						trace("Adding tile at " + x + ', ' + y);
+					}
+					else if (collisions[k] == 2) // top boundary only
+					{
+
+					}
+					k++;
+				}
+			}
 
 
 			//this.addChild(tileMap); 
@@ -66,7 +95,7 @@ package
 
 		public function addBody(body:Body):void
 		{
-			bodies.push(body);
+			physics.addBody(body);
 			spriteLayer.addChild(body);
 		}
 
@@ -100,10 +129,7 @@ package
 
 		public function onElapsed(seconds:Number) 
 		{
-			bodies.forEach(function(body:Body) {
-				body.velocityY -= gravity * seconds;
-				body.onElapsed(seconds);
-			});
+			physics.onElapsed(seconds);
 		}
 
 		private function doScale()

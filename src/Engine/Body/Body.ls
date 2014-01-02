@@ -18,17 +18,12 @@ package
 
 		public function onElapsed(seconds:Number) 
 		{
-			this.x = (int)(this.x + (velocityX * seconds));
-			this.y = (int)(this.y + (velocityY * seconds));
-
-			if (y <= 0) {
-				y = 0;
-				velocityY = 0;
-			}
-
-			trace(x, y);
-
 			dispatchEvent(new Event(Body.MOVED));
+		}
+
+		public function getBoundary():BoxBoundary
+		{
+			return new BoxBoundary(x, y, x + width, y + height);
 		}
 
 		public function move(x:int, y:int):void {
