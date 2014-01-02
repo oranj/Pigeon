@@ -23,7 +23,7 @@ package
 		{
 			spriteLayer = new Sprite();
 			physics = new Physics();
-			//physics.gravity = 10;
+			physics.gravity = 500;
 
 			this.addEventListener(Event.ADDED_TO_STAGE, function(event:Event)
 			{

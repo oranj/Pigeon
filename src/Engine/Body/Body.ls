@@ -11,6 +11,7 @@ package
 
 		public var velocityX:Number;
 		public var velocityY:Number;
+		public var isGrounded:Boolean = false;
 
 		function Body(texture:Texture) {
 			Image(texture);

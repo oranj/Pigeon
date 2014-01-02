@@ -37,7 +37,7 @@ package
 				body.y += (body.velocityY * seconds);
 
 				var boundary = body.getBoundary();
-
+				body.isGrounded = false;
 				for (var i = 0; i < boundaries.length; i++) 
 				{
 					var staticBoundary = boundaries[i];
@@ -46,22 +46,19 @@ package
 					switch (intersection)
 					{
 						case BoxBoundary.COLLIDE_LEFT:
-							trace("LEFT");
 							body.x = (staticBoundary.left - body.width);
 							body.velocityX = 0;
 							break;
 						case BoxBoundary.COLLIDE_TOP:
-							trace("TOP");
+							body.isGrounded = true;
 							body.y = (staticBoundary.top - body.height);
 							body.velocityY = 0;
 							break;
 						case BoxBoundary.COLLIDE_RIGHT:
-							trace("RIGHT");
 							body.x = staticBoundary.right;
 							body.velocityX = 0;
 							break;
 						case BoxBoundary.COLLIDE_BOTTOM:
-							trace("BOTTOM");
 							body.y = staticBoundary.bottom;
 							body.velocityY = 0;
 							break;

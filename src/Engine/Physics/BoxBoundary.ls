@@ -32,15 +32,14 @@ package
 
 		public function intersects(body:BoxBoundary):Number
 		{
-			if (body.bottom <= top && body.bottom > bottom) 
+			if (body.bottom >= top && body.bottom < bottom) 
 			{
-
 				if ((body.right > left && body.right <= right) || (body.left <= right && body.left > left)) 
 				{ 
 					return COLLIDE_TOP;
 				}
 			} 
-			else if (body.top > bottom && body.top <= top)
+			else if (body.top < bottom && body.top >= top)
 			{
 				if ((body.right > left && body.right <= right) || (body.left <= right && body.left > left)) 
 				{ 
